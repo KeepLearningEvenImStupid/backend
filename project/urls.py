@@ -9,7 +9,8 @@ router.register(r'UserData', views.userDataViewSets)
 router.register(r'GroupData', views.groupDataViewSets)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
+    path('register/', RegisterAPI.as_view(), name='register'),
 ]

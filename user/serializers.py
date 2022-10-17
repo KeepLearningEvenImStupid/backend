@@ -6,13 +6,14 @@ from rest_framework import serializers
 class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'password')
 
 
+# SERIALIZER UNTUK REGISTER
 class userRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -22,6 +23,7 @@ class userRegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+# GROUP SERIALIZER
 class groupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
