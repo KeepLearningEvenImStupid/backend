@@ -5,4 +5,4 @@ from rest_framework import serializers
 class AdmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Admission
-        fields = '__all__'
+        fields = ['id', 'nama', 'alamat', 'asal_sekolah', 'tempat_lahir', 'tanggal_lahir', 'angkatan_id', 'pengguna']
