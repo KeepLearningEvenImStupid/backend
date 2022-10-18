@@ -24,37 +24,6 @@ class userRegisterSerializer(serializers.ModelSerializer):
         group.user_set.add(user)
         return user
 
-# SERIALIZER UNTUK REGISTER PENGAJAR
-
-
-class dosenRegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            validated_data['username'], validated_data['email'], validated_data['password'])
-        group = Group.objects.get(name='Pengajar')
-        group.user_set.add(user)
-        return user
-
-# SERIALIZER UNTUK REGISTER ADMIN
-
-
-class adminRegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            validated_data['username'], validated_data['email'], validated_data['password'])
-        group = Group.objects.get(name='Admin')
-        group.user_set.add(user)
-        return user
 
 # GROUP SERIALIZER
 

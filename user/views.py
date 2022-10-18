@@ -35,32 +35,6 @@ class userRegisterAPI(generics.GenericAPIView):
         })
 
 
-class dosenRegisterAPI(generics.GenericAPIView):
-    serializer_class = dosenRegisterSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-            "user": userSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
-
-
-class adminRegisterAPI(generics.GenericAPIView):
-    serializer_class = adminRegisterSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-            "user": userSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
-
-
 class userLogin(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
 
