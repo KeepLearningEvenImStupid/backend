@@ -8,15 +8,15 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 
-router.register('admission', AdmissionViewset)
+router.register('Admission', AdmissionViewset)
 
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('User-Register/', userRegisterAPI.as_view(), name='register'),
-    path('Dosen-Register/', dosenRegisterAPI.as_view(), name='register'),
-    path('Admin-Register/', adminRegisterAPI.as_view(), name='register'),
+    path('User-Register/', userRegisterAPI.as_view(), name='register-user'),
+    path('Admission-Register/', mahasiswaRegisterAPI.as_view(),
+         name='register-admission'),
     path('login-gate/', userLogin.as_view(), name='login'),
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('Token/', views.tokenViewSet.as_view()),
