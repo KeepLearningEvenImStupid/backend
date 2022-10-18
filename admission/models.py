@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Angkatan(models.Model):
-    tahun = models.CharField(max_length=10)
+    tahun = models.CharField(max_length=4)
     semester = models.CharField(max_length=10)
     deskripsi = models.CharField(max_length=255)
 
