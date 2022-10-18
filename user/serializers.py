@@ -1,6 +1,7 @@
-from re import search
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from knox.models import AuthToken
+from django.contrib.auth import authenticate
 
 
 class userSerializer(serializers.ModelSerializer):
@@ -9,7 +10,7 @@ class userSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'password')
 
 
-# SERIALIZER UNTUK REGISTER
+# SERIALIZER UNTUK REGISTER USER
 class userRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -19,12 +20,21 @@ class userRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(
             validated_data['username'], validated_data['email'], validated_data['password'])
-
+        group = Group.objects.get(name='User')
+        group.user_set.add(user)
         return user
 
 
 # GROUP SERIALIZER
+
+
 class groupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('id', 'name')
+
+
+class tokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthToken
+        fields = ('user_id', 'token_key')
