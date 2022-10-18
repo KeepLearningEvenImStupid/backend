@@ -4,7 +4,7 @@ from django.contrib.auth.models import *
 
 
 class Angkatan(models.Model):
-    tahun = models.CharField(max_length=10)
+    tahun = models.CharField(max_length=4)
     semester = models.CharField(max_length=10)
     deskripsi = models.CharField(max_length=255)
 
