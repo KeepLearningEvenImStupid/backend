@@ -14,6 +14,7 @@ router.register(r'Admission', AdmissionViewset)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
     path('User-Register/', userRegisterAPI.as_view(), name='register-user'),
     path('login-gate/', userLogin.as_view(), name='login'),
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
