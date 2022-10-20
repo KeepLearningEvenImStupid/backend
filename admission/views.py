@@ -9,10 +9,17 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from rest_framework import status, permissions
 from rest_framework.permissions import *
-
+from django.views.generic.edit import CreateView
 # Create your views here.
 
 
 class AdmissionViewset(viewsets.ModelViewSet):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+class studentRegisterView(generics.CreateAPIView):
+    queryset = Admission.objects.all()
+    serializer_class = AdmissionSerializer
+    permission_classes = [permissions.IsAuthenticated]
