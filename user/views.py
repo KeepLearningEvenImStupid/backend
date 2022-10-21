@@ -10,6 +10,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -38,13 +39,12 @@ class userRegisterAPI(generics.GenericAPIView):
 
 class userLogin(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
+    redirect_authenticated_user = True
 
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        if request.user.is_superuser:
-            return redirect("https://9377-180-244-137-26.ngrok.io/admin/")
         login(request, user)
         return super(userLogin, self).post(request, format=None)
 

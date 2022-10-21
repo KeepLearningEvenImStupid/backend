@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'admission',
     'user',
     'article',
+    'corsheaders',
     'knox',
 ]
 
@@ -42,6 +43,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -139,3 +142,7 @@ REST_FRAMEWORK = {
 }
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://9377-180-244-137-26.ngrok.io']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
