@@ -1,5 +1,6 @@
 from pathlib import Path
-
+import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['9bfb-2001-448a-302e-3eba-1155-88d3-a545-230.ngrok.io']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -125,8 +127,10 @@ REST_FRAMEWORK = {
     ],
 
 }
-CSRF_TRUSTED_ORIGINS = [
-    'https://9bfb-2001-448a-302e-3eba-1155-88d3-a545-230.ngrok.io']
+# CSRF_TRUSTED_ORIGINS = [
+#  'https://9bfb-2001-448a-302e-3eba-1155-88d3-a545-230.ngrok.io',
+#   'http://127.0.0.1:3000',
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
