@@ -3,14 +3,17 @@ from rest_framework import serializers
 from knox.models import AuthToken
 from django.contrib.auth import authenticate
 
+from admission.models import Admission
+
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
 
-
 # SERIALIZER UNTUK REGISTER USER
+
+
 class userRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -26,7 +29,6 @@ class userRegisterSerializer(serializers.ModelSerializer):
 
 
 # GROUP SERIALIZER
-
 
 class groupSerializer(serializers.ModelSerializer):
     class Meta:

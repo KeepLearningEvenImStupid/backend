@@ -1,33 +1,35 @@
+from unicodedata import name
 from django.shortcuts import render
 from admission.models import Admission, Angkatan
 from rest_framework import viewsets, generics
-from .serializer import AdmissionSerializer, mahasiswaRegisterSerializer
-from .serializer import AngkatanSerializer, mahasiswaRegisterSerializer
-from django.contrib.auth.decorators import login_required
-from rest_framework.permissions import IsAuthenticated
+from .serializer import AdmissionSerializer
+from .serializer import AngkatanSerializer
+from django.contrib.auth.models import Group
 from rest_framework.response import Response
-
+from knox.models import AuthToken
+from rest_framework import status, permissions
+from rest_framework.permissions import *
+from django.views.generic.edit import CreateView
 # Create your views here.
 
 
 class AdmissionViewset(viewsets.ModelViewSet):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+class studentRegisterView(generics.CreateAPIView):
+    queryset = Admission.objects.all()
+    serializer_class = AdmissionSerializer
+
 
 class AngkatanViewset(viewsets.ModelViewSet):
     queryset = Angkatan.objects.all()
     serializer_class = AngkatanSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
-class mahasiswaRegisterAPI(generics.GenericAPIView):
-    serializer_class = mahasiswaRegisterSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-            "user": mahasiswaRegisterSerializer(user, context=self.get_serializer_context()).data,
-        })
+class studentRegisterView(generics.CreateAPIView):
+    queryset = Angkatan.objects.all()
+    serializer_class = AngkatanSerializer
