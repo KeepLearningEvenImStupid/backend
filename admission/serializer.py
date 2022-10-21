@@ -1,5 +1,5 @@
 from dataclasses import fields
-from admission.models import Admission
+from admission.models import Admission, Angkatan
 from rest_framework import serializers
 from django.contrib.auth.models import Group
 
@@ -24,3 +24,9 @@ class mahasiswaRegisterSerializer(serializers.ModelSerializer):
         group = Group.objects.get(name='Mahasiswa')
         group.user_set.add(user)
         return mahasiswa
+
+
+class AngkatanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Angkatan
+        fields = ['id', 'tahun', 'semester', 'deskripsi']

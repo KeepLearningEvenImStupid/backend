@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from admission.models import Admission
+from admission.models import Admission, Angkatan
 from rest_framework import viewsets, generics
 from .serializer import AdmissionSerializer, mahasiswaRegisterSerializer
+from .serializer import AngkatanSerializer, mahasiswaRegisterSerializer
 from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -12,6 +13,11 @@ from rest_framework.response import Response
 class AdmissionViewset(viewsets.ModelViewSet):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
+    permission_classes = [IsAuthenticated]
+
+class AngkatanViewset(viewsets.ModelViewSet):
+    queryset = Angkatan.objects.all()
+    serializer_class = AngkatanSerializer
     permission_classes = [IsAuthenticated]
 
 
