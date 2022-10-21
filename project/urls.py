@@ -13,6 +13,7 @@ router.register(r'Admission', AdmissionViewset)
 
 
 urlpatterns = [
+
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls'), name='rest_framework'),
@@ -21,5 +22,6 @@ urlpatterns = [
     path('login-gate/', userLogin.as_view(), name='login'),
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('Token/', views.tokenViewSet.as_view()),
+
 
 ]
