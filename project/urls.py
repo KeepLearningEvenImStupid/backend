@@ -9,13 +9,15 @@ from user import views
 from django.contrib import admin
 from django.urls import path, include
 from admission.views import AdmissionViewset
+from admission.views import AngkatanViewset
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('kategori/', KategoriViewSet)
 
-router.register(r'Admission', AdmissionViewset)
-
+router.register('Admission', AdmissionViewset)
+router.register('Angkatan', AngkatanViewset)
+router.register('article', ArtikelViewSet)
 
 urlpatterns = [
 
