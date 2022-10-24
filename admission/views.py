@@ -1,4 +1,4 @@
-from turtle import update
+
 from unicodedata import name
 from django.shortcuts import render
 from admission.models import Admission
