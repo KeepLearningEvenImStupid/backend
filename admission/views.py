@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView
 # Create your views here.
 
 
-class AdmissionViewset(viewsets.ModelViewSet):
+class AdmissionViewset(generics.RetrieveUpdateDestroyAPIView):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
@@ -30,8 +30,3 @@ class AngkatanViewset(viewsets.ModelViewSet):
     queryset = Angkatan.objects.all()
     serializer_class = AngkatanSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
-
-
-class studentRegisterView(generics.CreateAPIView):
-    queryset = Angkatan.objects.all()
-    serializer_class = AngkatanSerializer

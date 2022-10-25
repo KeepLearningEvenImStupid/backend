@@ -31,9 +31,11 @@ class Artikel(models.Model):
         Kategori, on_delete=models.RESTRICT)
     kategori_slug = models.CharField(max_length=255, null=True)
     artikel_slug = models.CharField(max_length=255, null=True)
+    kategori_value = models.CharField(max_length=255, null=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.kategori_value = self.kategori.nama
         self.kategori_slug = slugify(self.kategori.nama)
         self.artikel_slug = slugify(self.judul)
 

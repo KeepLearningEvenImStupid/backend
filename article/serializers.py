@@ -13,4 +13,4 @@ class ArtikelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artikel
         fields = ['id', 'judul', 'konten',
-                  'thumbnail', 'creator', 'kategori']
+                  'thumbnail', 'creator', 'kategori_slug', 'artikel_slug', 'kategori_value']

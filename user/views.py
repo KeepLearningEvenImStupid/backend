@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
 from .serializers import *
 from rest_framework import viewsets, permissions, generics
+from rest_framework.permissions import *
 from knox.models import AuthToken
 from rest_framework.response import Response
 from django.contrib.auth import login
@@ -22,6 +23,7 @@ class groupDataViewSets(viewsets.ReadOnlyModelViewSet):
 
 class userRegisterAPI(generics.GenericAPIView):
     serializer_class = userRegisterSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
