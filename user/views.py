@@ -1,4 +1,3 @@
-from urllib.request import Request
 from django.contrib.auth.models import User, Group
 from .serializers import *
 from rest_framework import viewsets, permissions, generics
@@ -8,9 +7,6 @@ from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
-from django.http import JsonResponse
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect
 # Create your views here.
 
 
