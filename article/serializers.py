@@ -9,7 +9,7 @@ class KategoriSerializer(serializers.ModelSerializer):
         fields = ['id', 'nama', 'deskripsi', 'slug']
 
 
-class ArtikelSerializer(serializers.ModelSerializer):
+class ArtikelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Artikel
         fields = ['id', 'judul', 'konten',

@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView
 # Create your views here.
 
 
-class AdmissionViewset(generics.RetrieveUpdateDestroyAPIView):
+class AdmissionViewset(viewsets.ModelViewSet):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]

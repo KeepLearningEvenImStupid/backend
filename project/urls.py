@@ -30,11 +30,14 @@ schema_view = get_schema_view(
 
 
 router = routers.DefaultRouter()
-router.register('Angkatan', AngkatanViewset)
-router.register('pertanyaan', pertanyaanViewsets)
-router.register('jawaban', jawabanViewsets)
+# URL untuk keperluan admin(Full akses HTTP Method)
+router.register(r'kategori-admin', KategoriViewSetAdmin)
+router.register(r'artikel-admin', ArtikelViewSetAdmin)
+router.register(r'admission-admin', AdmissionViewset)
 
 urlpatterns = [
+    # URL untuk mengakses API khusus untuk admin
+    path('admin-need/', include(router.urls)),
 
     # URL untuk django Swagger
     path('',  schema_view.with_ui('swagger', cache_timeout=0),
@@ -47,13 +50,11 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls'), name='rest_framework'),
 
     # URL untuk artikel,kategori yang diperuntukan untuk user
-    path('artikel/', ArtikelDetail.as_view()),
     path('kategori/', KategoriDetail.as_view()),
+    path('article/', ArtikelViewAll.as_view()),
+    re_path('^article/(?P<kategori_slug>.+)/',
+            ArtikelKategoriDetail.as_view()),
 
-    # URL untuk keperluan admin(Full akses HTTP Method)
-    path('admission/', AdmissionViewset.as_view()),
-    path('kategori-admin/', KategoriViewSet.as_view()),
-    path('artikel-admin/', ArtikelViewSet.as_view()),
 
     # URL untuk keperluan register user dan pendaftaran mahasiswa
     path('user-register/', userRegisterAPI.as_view(), name='register-user'),
@@ -65,4 +66,7 @@ urlpatterns = [
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('Token/', views.tokenViewSet.as_view()),
 
+    # URL untuk bagian tanya-jawab user
+    path('pertanyaan/', pertanyaanViewsets.as_view()),
+    path('jawaban/', jawabanViewsets.as_view()),
 ]
