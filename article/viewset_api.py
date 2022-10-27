@@ -28,11 +28,19 @@ class ArtikelViewAll(generics.ListAPIView):
     search_fields = ['kategori_slug']
 
 
+class ArtikelDetail(generics.ListAPIView):
+    serializer_class = ArtikelSerializer
+
+    def get_queryset(self):
+        kategori = self.kwargs['kategori_slug']
+        artikel = self.kwargs['artikel_slug']
+        return Artikel.objects.filter(kategori_slug=kategori, artikel_slug=artikel)
+
+
 class ArtikelKategoriDetail(generics.ListAPIView):
     serializer_class = ArtikelSerializer
 
-    def get_queryset(self, **kwargs):
-
+    def get_queryset(self):
         kategori = self.kwargs['kategori_slug']
         return Artikel.objects.filter(kategori_slug=kategori)
 

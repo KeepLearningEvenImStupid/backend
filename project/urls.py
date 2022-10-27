@@ -52,7 +52,11 @@ urlpatterns = [
     # URL untuk artikel,kategori yang diperuntukan untuk user
     path('kategori/', KategoriDetail.as_view()),
     path('article/', ArtikelViewAll.as_view()),
-    re_path('^article/(?P<kategori_slug>.+)/',
+
+    # Filter untuk artikel
+    re_path('^article/(?P<kategori_slug>.+)/(?P<artikel_slug>.+)/$',
+            ArtikelDetail.as_view()),
+    re_path('^article/(?P<kategori_slug>.+)/$',
             ArtikelKategoriDetail.as_view()),
 
 
