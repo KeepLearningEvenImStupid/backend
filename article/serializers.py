@@ -1,14 +1,16 @@
-import imp
 from article.models import Kategori
 from article.models import Artikel
 from rest_framework import serializers
 
+
 class KategoriSerializer(serializers.ModelSerializer):
     class Meta:
         model = Kategori
-        fields = ['id', 'nama', 'deskripsi']
+        fields = ['id', 'nama', 'deskripsi', 'slug']
 
-class ArtikelSerializer(serializers.ModelSerializer):
+
+class ArtikelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Artikel
-        fields = ['judul', 'konten', 'thumbnail', 'slug', 'creator', 'kategori']
+        fields = ['id', 'judul', 'konten',
+                  'thumbnail', 'creator', 'kategori_slug', 'artikel_slug', 'kategori_value']

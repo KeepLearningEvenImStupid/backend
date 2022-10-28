@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['9377-180-244-137-26.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -29,8 +29,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'admission',
     'user',
+    'questionanswer',
     'article',
+    'corsheaders',
     'knox',
+<<<<<<< HEAD
+=======
+    'drf_yasg',
+>>>>>>> 4941e8a606a21a72438d1e3e09c5449201f3f7ce
     'django_filters',
 ]
 
@@ -43,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -127,16 +135,22 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ],
 
+
 }
-# CSRF_TRUSTED_ORIGINS = [
-#  'https://9bfb-2001-448a-302e-3eba-1155-88d3-a545-230.ngrok.io',
-#   'http://127.0.0.1:3000',
-# ]
+
+
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ],
+
 }
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://9377-180-244-137-26.ngrok.io']

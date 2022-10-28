@@ -1,15 +1,13 @@
-from urllib.request import Request
 from django.contrib.auth.models import User, Group
 from .serializers import *
 from rest_framework import viewsets, permissions, generics
+from rest_framework.permissions import *
 from knox.models import AuthToken
 from rest_framework.response import Response
 from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
-from django.http import JsonResponse
-from django.shortcuts import redirect
 # Create your views here.
 
 
@@ -25,6 +23,7 @@ class groupDataViewSets(viewsets.ReadOnlyModelViewSet):
 
 class userRegisterAPI(generics.GenericAPIView):
     serializer_class = userRegisterSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -38,13 +37,12 @@ class userRegisterAPI(generics.GenericAPIView):
 
 class userLogin(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
+    redirect_authenticated_user = True
 
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        if request.user.is_superuser:
-            return redirect("https://9377-180-244-137-26.ngrok.io/admin/")
         login(request, user)
         return super(userLogin, self).post(request, format=None)
 

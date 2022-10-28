@@ -27,6 +27,8 @@ class studentRegisterView(generics.CreateAPIView):
     queryset = Admission.objects.all()
     serializer_class = AdmissionSerializer
 
+    permission_classes = [IsAuthenticated]
+
 
 class AngkatanViewset(viewsets.ModelViewSet):
     queryset = Angkatan.objects.all()
