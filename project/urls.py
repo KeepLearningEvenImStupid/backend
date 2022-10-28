@@ -4,13 +4,12 @@ from article.viewset_api import *
 from rest_framework import routers
 from knox import views as knox_views
 from admission.views import studentRegisterView
-from questionanswer.views import jawabanViewsets, pertanyaanViewsets
 from user.views import *
 from user import views
 from django.contrib import admin
 from django.urls import path, include
 from admission.views import AdmissionViewset
-from admission.views import AngkatanViewset
+from questionandanswer.views import *
 from rest_framework import routers
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -70,7 +69,19 @@ urlpatterns = [
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('Token/', views.tokenViewSet.as_view()),
 
-    # URL untuk bagian tanya-jawab user
-    path('pertanyaan/', pertanyaanViewsets.as_view()),
-    path('jawaban/', jawabanViewsets.as_view()),
+
+    # URL untuk user detail
+    re_path('^profile/(?P<username>.+)/$', userDetail.as_view()),
+
+    # URL untuk questionanswer
+    path('Pertanyaan-Hukum/', PertanyaanJawabanViewAll.as_view()),
+    path('Ajukan-Pertanyaan/', PertanyaanView.as_view()),
+    path('Jawab-Pertanyaan/', JawabanViewAll.as_view()),
+    re_path('Jawab-Pertanyaan/(?P<pk>.+)/$', JawabanEdit.as_view()),
+
+    # URL untuk filter questionadnswer
+    re_path('^Pertanyaan-Hukum/(?P<slug>.+)/$',
+            PertanyaanJawabanFilter.as_view()),
+    re_path('^Pertanyaan-Hukum/(?P<slug>.+)/(?P<penanya>.+)/$',
+            PertanyaanJawabanDetail.as_view()),
 ]

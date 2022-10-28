@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class QuestionanswerConfig(AppConfig):
+class QuestionandanswerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'questionanswer'
+    name = 'questionandanswer'

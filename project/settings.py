@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aaeb-2001-448a-302c-195e-cad-5a00-d377-4942.ngrok.io']
 
 
 # Application definition
@@ -29,12 +29,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'admission',
     'user',
-    'questionanswer',
     'article',
     'corsheaders',
     'knox',
     'drf_yasg',
     'django_filters',
+    'questionandanswer',
 ]
 
 MIDDLEWARE = [
@@ -138,10 +138,10 @@ REST_FRAMEWORK = {
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000']
+    'http://localhost:3000', 'https://aaeb-2001-448a-302c-195e-cad-5a00-d377-4942.ngrok.io']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    'http://localhost:3000', 'https://aaeb-2001-448a-302c-195e-cad-5a00-d377-4942.ngrok.io'
 ]
 
 

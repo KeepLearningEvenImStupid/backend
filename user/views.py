@@ -11,9 +11,12 @@ from knox.views import LoginView as KnoxLoginView
 # Create your views here.
 
 
-class userDataViewSets(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = userSerializer
+class userDetail(generics.ListAPIView):
+    serializer_class = userDetailSerializer
+
+    def get_queryset(self):
+        username = self.kwargs['username']
+        return User.objects.filter(username=username)
 
 
 class groupDataViewSets(viewsets.ReadOnlyModelViewSet):

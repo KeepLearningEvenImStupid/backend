@@ -30,6 +30,7 @@ class ArtikelViewAll(generics.ListAPIView):
 
 class ArtikelDetail(generics.ListAPIView):
     serializer_class = ArtikelSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         kategori = self.kwargs['kategori_slug']
@@ -39,6 +40,7 @@ class ArtikelDetail(generics.ListAPIView):
 
 class ArtikelKategoriDetail(generics.ListAPIView):
     serializer_class = ArtikelSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         kategori = self.kwargs['kategori_slug']
@@ -46,6 +48,7 @@ class ArtikelKategoriDetail(generics.ListAPIView):
 
 
 class KategoriDetail(generics.ListAPIView):
+    permission_classes = [AllowAny]
     serializer_class = KategoriSerializer
     queryset = Kategori.objects.all()
     filter_backends = [filters.SearchFilter]

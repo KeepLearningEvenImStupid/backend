@@ -1,8 +1,5 @@
-from asyncio.windows_events import NULL
-from typing_extensions import Required
 from django.db import models
 from slugify import slugify
-from django.urls import reverse
 
 
 class Kategori(models.Model):
