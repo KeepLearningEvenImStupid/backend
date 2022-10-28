@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'user',
     'article',
     'knox',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
