@@ -1,5 +1,7 @@
 from article.models import Kategori, Artikel
 from article.serializers import KategoriSerializer, ArtikelSerializer
+from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
 from rest_framework.permissions import *
 from rest_framework import filters
@@ -11,6 +13,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 class KategoriViewSetAdmin(viewsets.ModelViewSet):
     queryset = Kategori.objects.all()
     serializer_class = KategoriSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['nama']
+
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminUser]
 
 

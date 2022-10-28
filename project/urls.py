@@ -35,6 +35,9 @@ router.register(r'artikel-admin', ArtikelViewSetAdmin)
 router.register(r'admission-admin', AdmissionViewset)
 
 urlpatterns = [
+
+    path('aoi', include(router.urls)),
+
     # URL untuk mengakses API khusus untuk admin
     path('admin-need/', include(router.urls)),
 
@@ -43,6 +46,7 @@ urlpatterns = [
          name='schema-swagger-ui'),
     path('api/api-iblam.json',
          schema_view.without_ui(cache_timeout=0), name='schema-json'),
+
 
     # URL untuk masuk ke page django admin
     path('admin/', admin.site.urls),

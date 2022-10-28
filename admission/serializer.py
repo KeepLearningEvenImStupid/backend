@@ -11,6 +11,7 @@ class AdmissionSerializer(serializers.ModelSerializer):
         fields = ['id', 'nama', 'alamat', 'asal_sekolah',
                   'tempat_lahir', 'tanggal_lahir', 'angkatan_id', 'pengguna', 'status']
 
+
 class AngkatanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Angkatan
