@@ -11,10 +11,12 @@ class PertanyaanSerializer(serializers.ModelSerializer):
 class JawabanSerializer(serializers.ModelSerializer):
     class Meta:
         model = pertanyaanDanJawabanModels
-        fields = ['penanya', 'pertanyaan', 'jawaban', 'penjawab']
+        fields = ['penanya',
+                  'pertanyaan', 'jawaban', 'penjawab']
 
 
 class PertanyaanJawabanSerializer(serializers.ModelSerializer):
     class Meta:
         model = pertanyaanDanJawabanModels
-        fields = ['penanya', 'pertanyaan', 'jawaban', 'penjawab', 'slug']
+        fields = ['penanya',
+                  'pertanyaan', 'jawaban', 'penjawab', 'slug']

@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['aaeb-2001-448a-302c-195e-cad-5a00-d377-4942.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'questionandanswer',
+    'Form',
 ]
 
 MIDDLEWARE = [

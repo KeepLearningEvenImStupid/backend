@@ -1,6 +1,5 @@
 from article.models import Kategori, Artikel
 from article.serializers import KategoriSerializer, ArtikelSerializer
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
 from rest_framework.permissions import *
@@ -23,6 +22,9 @@ class ArtikelViewSetAdmin(viewsets.ModelViewSet):
     queryset = Artikel.objects.all()
     serializer_class = ArtikelSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminUser]
+
+    def perform_create(self, serializer, **kwargs):
+        serializer.save(creator=self.request.user)
 
 
 class ArtikelViewAll(generics.ListAPIView):

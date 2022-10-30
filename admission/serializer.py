@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 
 
 class AdmissionSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Admission
         fields = ['id', 'nama', 'alamat', 'asal_sekolah',

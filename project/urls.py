@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
+from Form.views import FormAdmin, FormUser
 from article.viewset_api import *
 from rest_framework import routers
 from knox import views as knox_views
@@ -13,6 +14,7 @@ from questionandanswer.views import *
 from rest_framework import routers
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from Form.models import *
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -33,10 +35,11 @@ router = routers.DefaultRouter()
 router.register(r'kategori-admin', KategoriViewSetAdmin)
 router.register(r'artikel-admin', ArtikelViewSetAdmin)
 router.register(r'admission-admin', AdmissionViewset)
+router.register(r'form-admin', FormAdmin)
+router.register(r'jawab-pertanyaan', JawabanEdit)
 
 urlpatterns = [
 
-    path('aoi', include(router.urls)),
 
     # URL untuk mengakses API khusus untuk admin
     path('admin-need/', include(router.urls)),
@@ -80,12 +83,13 @@ urlpatterns = [
     # URL untuk questionanswer
     path('Pertanyaan-Hukum/', PertanyaanJawabanViewAll.as_view()),
     path('Ajukan-Pertanyaan/', PertanyaanView.as_view()),
-    path('Jawab-Pertanyaan/', JawabanViewAll.as_view()),
-    re_path('Jawab-Pertanyaan/(?P<pk>.+)/$', JawabanEdit.as_view()),
 
     # URL untuk filter questionadnswer
     re_path('^Pertanyaan-Hukum/(?P<slug>.+)/$',
             PertanyaanJawabanFilter.as_view()),
     re_path('^Pertanyaan-Hukum/(?P<slug>.+)/(?P<penanya>.+)/$',
             PertanyaanJawabanDetail.as_view()),
+
+    # URL untuk Form User
+    path('formulir/', FormUser.as_view())
 ]

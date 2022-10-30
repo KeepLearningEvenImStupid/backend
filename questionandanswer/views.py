@@ -13,14 +13,17 @@ class PertanyaanView(generics.ListCreateAPIView):
     serializer_class = PertanyaanSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer, **kwargs):
+        serializer.save(penanya=self.request.user)
 
-class JawabanEdit(generics.RetrieveUpdateAPIView):
+
+class JawabanEdit(viewsets.ModelViewSet):
     serializer_class = JawabanSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminUser]
+    queryset = pertanyaanDanJawabanModels.objects.all()
 
-    def get_queryset(self):
-        pertanyaan = self.kwargs['pk']
-        return pertanyaanDanJawabanModels.objects.filter(pertanyaan=pertanyaan)
+    def perform_create(self, serializer, **kwargs):
+        serializer.save(penjawab=self.request.user)
 
 
 class JawabanViewAll(generics.ListAPIView):
