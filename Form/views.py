@@ -11,13 +11,10 @@ class FormAdmin(viewsets.ModelViewSet):
     serializer_class = FormSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['subject']
-
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminUser]
 
 
 class FormUser(generics.CreateAPIView):
     queryset = Form.objects.all()
     serializer_class = FormSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['subject']
-    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminUser]
+    permission_classes = [IsAuthenticated]

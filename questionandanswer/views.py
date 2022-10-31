@@ -11,7 +11,7 @@ from rest_framework import filters
 class PertanyaanView(generics.ListCreateAPIView):
     queryset = pertanyaanDanJawabanModels.objects.all()
     serializer_class = PertanyaanSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer, **kwargs):
         serializer.save(penanya=self.request.user)

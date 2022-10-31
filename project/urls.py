@@ -34,7 +34,7 @@ router = routers.DefaultRouter()
 # URL untuk keperluan admin(Full akses HTTP Method)
 router.register(r'kategori-admin', KategoriViewSetAdmin)
 router.register(r'artikel-admin', ArtikelViewSetAdmin)
-router.register(r'admission-admin', AdmissionViewset)
+router.register('admission-admin/', AdmissionViewset)
 router.register(r'form-admin', FormAdmin)
 router.register(r'jawab-pertanyaan', JawabanEdit)
 
@@ -72,7 +72,7 @@ urlpatterns = [
          name='register-student'),
 
     # URL untuk keperluan login user
-    path('login-gate/', userLogin.as_view(), name='login'),
+    path('login-gate', userLogin.as_view(), name='login'),
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('Token/', views.tokenViewSet.as_view()),
 
@@ -91,5 +91,5 @@ urlpatterns = [
             PertanyaanJawabanDetail.as_view()),
 
     # URL untuk Form User
-    path('formulir/', FormUser.as_view())
+    path('formulir', FormUser.as_view())
 ]

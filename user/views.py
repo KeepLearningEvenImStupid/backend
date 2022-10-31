@@ -53,3 +53,4 @@ class userLogin(KnoxLoginView):
 class tokenViewSet(generics.ListAPIView):
     queryset = AuthToken.objects.all()
     serializer_class = tokenSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
