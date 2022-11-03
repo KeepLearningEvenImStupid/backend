@@ -8,6 +8,8 @@ from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
+from django.core.mail import send_mail
+from rest_framework.decorators import api_view
 # Create your views here.
 
 

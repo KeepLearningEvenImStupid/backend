@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['1fe3-2001-448a-302b-150d-e5d1-541a-de2e-8e1d.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django_filters',
     'questionandanswer',
     'Form',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +140,9 @@ REST_FRAMEWORK = {
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000', 'https://1fe3-2001-448a-302b-150d-e5d1-541a-de2e-8e1d.ngrok.io', ]
+    'http://localhost:3000', 'https://38c2-2001-448a-3024-202d-d0f7-ea02-d5eb-b90b.ngrok.io', ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

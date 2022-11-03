@@ -46,3 +46,8 @@ class tokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthToken
         fields = ('user_id', 'token_key')
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    new_password = serializers.CharField(required=True)

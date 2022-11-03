@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import *
 from django.utils.translation import gettext_lazy as _
@@ -34,7 +35,7 @@ class Admission(models.Model):
     angkatan_id = models.ForeignKey(
         Angkatan, on_delete=models.RESTRICT, null=True)
     pengguna = models.ForeignKey(
-        User, on_delete=models.RESTRICT, null=True, blank=True)
+        User, on_delete=models.RESTRICT, null=True, blank=True, unique=True)
 
     __original_status = None
 

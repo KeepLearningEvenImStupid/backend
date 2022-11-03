@@ -91,5 +91,9 @@ urlpatterns = [
             PertanyaanJawabanDetail.as_view()),
 
     # URL untuk Form User
-    path('formulir', FormUser.as_view())
+    path('formulir', FormUser.as_view()),
+
+    # URL forgot password
+    path('password_reset/', include('django_rest_passwordreset.urls',
+                                    namespace='password_reset')),
 ]
