@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django_filters',
     'questionandanswer',
     'Form',
-    'django_rest_passwordreset',
+
 ]
 
 MIDDLEWARE = [
@@ -144,5 +144,3 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
