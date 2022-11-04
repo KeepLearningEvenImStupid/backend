@@ -4,12 +4,11 @@ from Form.views import FormAdmin, FormUser
 from article.viewset_api import *
 from rest_framework import routers
 from knox import views as knox_views
-from admission.views import studentRegisterView
+from admission.views import *
 from user.views import *
 from user import views
 from django.contrib import admin
 from django.urls import path, include
-from admission.views import AdmissionViewset
 from questionandanswer.views import *
 from rest_framework import routers
 from drf_yasg.views import get_schema_view
@@ -67,8 +66,8 @@ urlpatterns = [
 
 
     # URL untuk keperluan register user dan pendaftaran mahasiswa
-    path('user-register/', userRegisterAPI.as_view(), name='register-user'),
-    path('student-register/', studentRegisterView.as_view(),
+    path('User-Register/', userRegisterAPI.as_view()),
+    path('daftar', studentRegisterView.as_view(),
          name='register-student'),
 
     # URL untuk keperluan login user
@@ -94,4 +93,12 @@ urlpatterns = [
     path('formulir', FormUser.as_view()),
 
     # URL forgot password
+    path('password-reset/', include('django_rest_passwordreset.urls',
+         namespace='password_reset')),
+
+    # URL jalur seleksi calon mahasiswa baru
+    path('spmbfront/jalur-seleksi', jalurSeleksiUserAPI.as_view()),
+    re_path('^spmbfront/jalur-pendaftaran/(?P<slug>.+)/',
+            jalurSeleksiDetailUserAPI.as_view())
+
 ]

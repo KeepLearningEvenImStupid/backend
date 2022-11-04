@@ -9,7 +9,11 @@ from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from django.core.mail import send_mail
-from rest_framework.decorators import api_view
+from django.db import models
+from django.dispatch import receiver
+from django.urls import reverse
+from django_rest_passwordreset.signals import reset_password_token_created
+import smtplib
 # Create your views here.
 
 
@@ -56,3 +60,19 @@ class tokenViewSet(generics.ListAPIView):
     queryset = AuthToken.objects.all()
     serializer_class = tokenSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+class CustomPasswordResetView:
+    @receiver(reset_password_token_created)
+    def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+
+        email_plaintext_message = "{}?token={}".format(
+            reverse('password_reset:reset-password-request'), reset_password_token.key)
+
+        send_mail(
+            "Iblam",
+            email_plaintext_message,
+            "Iblamuniversity@gmail.com",
+            [reset_password_token.user.email],
+            fail_silently=False,
+        )

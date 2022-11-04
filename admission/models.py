@@ -1,4 +1,4 @@
-from enum import unique
+from slugify import slugify
 from django.db import models
 from django.contrib.auth.models import *
 from django.utils.translation import gettext_lazy as _
@@ -12,6 +12,80 @@ class Angkatan(models.Model):
 
     def __str__(self):
         return self.tahun
+
+
+class Seleksi(models.Model):
+    strata1 = 'S1 - Strata 1'
+    strata2 = 'S2 - Strata 2'
+
+    sistem_kuliah_sore_A = 'Reguler Sore Kampus A'
+    sistem_kuliah_sore_B = 'Reguler Sore Kampus B'
+
+    sistem_kuliah_pagi_A = 'Reguler Pagi Kampus A'
+    sistem_kuliah_pagi_B = 'Reguler Pagi Kampus B'
+
+    program_studi_s1 = 'S1 - Ilmu Hukun (S1) '
+    program_studi_s2 = 'S2 - Ilmu Hukun (S2) '
+
+    CHOICES_STRATA = (
+        (strata1, strata1),
+        (strata2, strata2),
+    )
+
+    CHOICES_SISTEM_KULIAH = (
+        (sistem_kuliah_pagi_A, sistem_kuliah_pagi_A),
+        (sistem_kuliah_pagi_B, sistem_kuliah_pagi_B),
+        (sistem_kuliah_sore_A, sistem_kuliah_sore_A),
+        (sistem_kuliah_sore_B, sistem_kuliah_sore_B),
+    )
+
+    CHOICES_PROGRAMSTUDI = (
+        (program_studi_s1, program_studi_s1),
+        (program_studi_s2, program_studi_s2),
+    )
+
+    kategori = models.CharField(max_length=255)
+    deskripsi = models.CharField(max_length=255)
+    awal_pendaftaran = models.DateField()
+    akhir_pendaftaran = models.DateField()
+
+    strata = models.CharField(
+        max_length=255, choices=CHOICES_STRATA, default='--Pilih Salah Satu--')
+
+    sistem_kuliah = models.CharField(
+        max_length=255, choices=CHOICES_SISTEM_KULIAH, default='--Pilih Salah Satu--')
+
+    program_studi = models.CharField(
+        max_length=255, choices=CHOICES_PROGRAMSTUDI, default='--Pilih Salah Satu--')
+
+    gelombang = models.CharField(max_length=255)
+
+    formulir = models.CharField(max_length=20, default="BERBAYAR")
+
+    daya_tampung = models.BigIntegerField()
+
+    periode_pendaftaran = models.CharField(
+        max_length=255, default='Periode Pendaftaran')
+
+    slug = models.SlugField(max_length=255, blank=True, null=True)
+
+    ujian_hukum = models.CharField(
+        max_length=255, blank=True)
+
+    ujian_kemampuan_dasar = models.CharField(
+        max_length=255, blank=True)
+
+    tanggal_mulai_ujian_kemampuan_dasar = models.DateField(
+        null=True, blank=True)
+    tanggal_selesai_ujian_kemampuan_dasar = models.DateField(
+        null=True, blank=True)
+
+    tanggal_mulai_ujian_hukum = models.DateField(null=True, blank=True)
+    tanggal_selesai_ujian_hukum = models.DateField(null=True, blank=True)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs) -> None:
+        self.slug = slugify(self.kategori)
+        return super().save(force_insert, force_update, *args, **kwargs)
 
 
 class Admission(models.Model):
@@ -34,8 +108,11 @@ class Admission(models.Model):
         max_length=255, choices=CHOICES, default=PENDING)
     angkatan_id = models.ForeignKey(
         Angkatan, on_delete=models.RESTRICT, null=True)
-    pengguna = models.ForeignKey(
-        User, on_delete=models.RESTRICT, null=True, blank=True, unique=True)
+    pengguna = models.OneToOneField(
+        User, on_delete=models.RESTRICT, null=True, blank=True)
+
+    program_studi = models.ForeignKey(
+        Seleksi, on_delete=models.RESTRICT, related_name='Program Studi+', null=True)
 
     __original_status = None
 

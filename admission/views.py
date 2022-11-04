@@ -1,7 +1,6 @@
-from admission.models import Admission, Angkatan
+from admission.models import Admission, Angkatan, Seleksi
 from rest_framework import viewsets, generics
-from .serializer import AdmissionSerializer
-from .serializer import AngkatanSerializer
+from .serializer import *
 from rest_framework import viewsets, filters
 from rest_framework.permissions import *
 from django_filters.rest_framework import DjangoFilterBackend
@@ -26,6 +25,12 @@ class studentRegisterView(generics.CreateAPIView):
         serializer.save(pengguna=self.request.user)
 
 
+class studentChooseStudyProgramAPI(generics.CreateAPIView):
+    queryset = Admission.objects.all()
+    serializer_class = AdmissionProgramStudiSerializer
+    permission_classes = [IsAuthenticated]
+
+
 class AngkatanViewset(viewsets.ModelViewSet):
     queryset = Angkatan.objects.all()
     serializer_class = AngkatanSerializer
@@ -33,3 +38,24 @@ class AngkatanViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
 
     search_fields = ['id', 'tahun', 'semester', 'deskripsi']
+
+
+class jalurSeleksiAdminAPI(generics.ListAPIView):
+    queryset = Seleksi.objects.all()
+    serializer_class = JalurSeleksiSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+class jalurSeleksiUserAPI(generics.ListAPIView):
+    queryset = Seleksi.objects.all()
+    serializer_class = JalurSeleksiSerializer
+    permission_classes = [AllowAny]
+
+
+class jalurSeleksiDetailUserAPI(generics.ListAPIView):
+    serializer_class = JalurSeleksiDetailSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        return Seleksi.objects.filter(slug=slug)
