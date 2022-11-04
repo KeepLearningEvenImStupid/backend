@@ -62,7 +62,7 @@ class Seleksi(models.Model):
 
     formulir = models.CharField(max_length=20, default="BERBAYAR")
 
-    daya_tampung = models.IntegerField(blank=True)
+    daya_tampung = models.CharField(max_length=255, blank=True)
 
     periode_pendaftaran = models.CharField(
         max_length=255, default='Periode Pendaftaran')

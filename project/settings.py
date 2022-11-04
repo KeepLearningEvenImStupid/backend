@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['a7f2-2001-448a-302f-1eed-b89b-46fe-c5dd-b6a4.ngrok.io']
+ALLOWED_HOSTS = ['0353-2001-448a-3021-4c5e-4907-a89b-9aad-6167.ngrok.io']
 
 
 # Application definition
@@ -140,13 +140,13 @@ REST_FRAMEWORK = {
 
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000', 'https://a7f2-2001-448a-302f-1eed-b89b-46fe-c5dd-b6a4.ngrok.io', ]
+    'http://localhost:3000', 'https://0353-2001-448a-3021-4c5e-4907-a89b-9aad-6167.ngrok.io', ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = ''
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'iblamuniversity@gmail.com'
-EMAIL_HOST_PASSWORD = 'vckbsruieyxcmntf'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
