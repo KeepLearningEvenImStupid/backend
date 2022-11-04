@@ -62,7 +62,7 @@ class Seleksi(models.Model):
 
     formulir = models.CharField(max_length=20, default="BERBAYAR")
 
-    daya_tampung = models.BigIntegerField()
+    daya_tampung = models.IntegerField(blank=True)
 
     periode_pendaftaran = models.CharField(
         max_length=255, default='Periode Pendaftaran')
@@ -112,7 +112,7 @@ class Admission(models.Model):
         User, on_delete=models.RESTRICT, null=True, blank=True)
 
     program_studi = models.ForeignKey(
-        Seleksi, on_delete=models.RESTRICT, related_name='Program Studi+', null=True)
+        Seleksi, on_delete=models.RESTRICT, related_name='Program Studi+',  null=True)
 
     __original_status = None
 
