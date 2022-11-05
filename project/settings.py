@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-#s!nla!cgwsepc$h7l8w9^6zg6ls-)3hh17cm2t@q@a@c=b)od
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['0353-2001-448a-3021-4c5e-4907-a89b-9aad-6167.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'questionandanswer',
     'Form',
     'django_rest_passwordreset',
+    'library',
 ]
 
 MIDDLEWARE = [
